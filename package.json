@@ -1,0 +1,32 @@
+{
+  "name": "usermanagement-microservice",
+  "version": "1.0.0",
+  "description": "User Management, User Profiles, Login credentials",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saumya999/usermanagement-microservice.git"
+  },
+  "keywords": [
+    "Node.js",
+    "API",
+    "REST",
+    "framework",
+    "Authorization"
+  ],
+  "author": "Saumyadipta Sarkar, Shraddha Wankhade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saumya999/usermanagement-microservice/issues"
+  },
+  "homepage": "https://github.com/Saumya999/usermanagement-microservice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "morgan": "^1.10.0"
+  }
+}
