@@ -2,36 +2,44 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const BASE_URL = "/userManagement/v1.0";
 const mongoose = require("mongoose");
+const { graphqlHTTP } = require('express-graphql');
+
+const { authentication } = require('./api/middleware/authmiddleware');
+const { createJwtToken } = require('./api/utils/authentication');
 
 
-// For logging the requests using morgan
-
+/** MongoDb Connection Establishment */
+mongoose.connect(
+  "mongodb+srv://shraddha:shraddha@cluster0.svyi6.mongodb.net/octopus?retryWrites=true&w=majority",
+  { useMongoClient: true }
+);
+/** For logging the requests using morgan */
 app.use(morgan("dev"));
+//app.use(authentication);
+/** Parsing the URL and json */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(
-  "mongodb+srv://admin:admin@cluster0.h6uil.mongodb.net/octopus_backend?retryWrites=true&w=majority",
-  { useMongoClient: true }
-);
 
-// Error mapping for the routes not found
+/** GraphQL Schema And Resolvers import */
+const graphQlSchema = require('./api/graphql/Schemas/schema');
+const graphQlResolvers = require('./api/graphql/Resolvers/userResolvers');
 
-app.use((req, res, next) => {
-  const error = new Error("Endpoint Not Found");
-  error.status = 404;
-  next(error);
-});
+/** Defining the graphql endpoint */
+app.use('/userManagement/v1/graphql', graphqlHTTP({
+  schema: graphQlSchema,
+  rootValue: graphQlResolvers,
+  graphiql: true
+}));
 
-app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
-});
+/*** This Get Route is still under Test for JWT Verification Enhancement */
+app.get('/authProvider', (req, res) => {
+  res.json(createJwtToken({
+    username: "shraps999",
+    email: "shraps123@gmail.com"
+  }));
+})
 
+/** Exporting App configuration for Server Creation */
 module.exports = app;
