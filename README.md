@@ -4,7 +4,7 @@ User Management System, User Profiles, Login Credentials
 
 ## Mutation for Create User Example Mutation with proper Payload
 
-mutation{
+`mutation{
 createUser(userInput:{
 firstName: "Saumyadipta",
 lastName: "Sarkar",
@@ -33,4 +33,4 @@ email
 mobile  
  }
 }
-}
+}`
