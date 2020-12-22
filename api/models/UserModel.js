@@ -9,15 +9,14 @@ const mongoose = require('mongoose');
 
 
 const userSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     personal_details: {
-        firstName: String,
-        lastName: { type: String, required: true },
+        firstName: { type: String, required: true },
+        lastName: String,
         fullName: String
         /** Will be calculated on the Post Action according to the User Input */
     },
     contact_info: {
-        mobile: { type: Number, unique: true, required: true },
+        mobile: { type: String, required: true },
         email: { type: String, unique: true, required: true },
         fax: String
     },
@@ -25,12 +24,12 @@ const userSchema = mongoose.Schema({
         city: String,
         street: String,
         area: String,
-        zipcode: { type: Number, required: true },
-        state: { type: Number, required: true },
+        zipcode: { type: String, required: true },
+        state: { type: String, required: true },
         country: { type: String, required: true }
     },
     password: { type: String, required: true },
-    confirmPassword: { type: String, required: true }
+    confirmPassword: { type: String}
     /** Need to be validated on Post action for Register
     with actual password */
 });

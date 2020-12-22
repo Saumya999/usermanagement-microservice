@@ -4,7 +4,8 @@
   "description": "User Management, User Profiles, Login credentials",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,15 @@
   },
   "homepage": "https://github.com/Saumya999/usermanagement-microservice#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.4.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
   }
 }
