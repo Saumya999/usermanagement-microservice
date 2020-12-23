@@ -25,6 +25,7 @@ type MailingAddress {
 
 type UserDetails {
     _id: ID!
+    username: String!
     personal_details: PersonalDetails
     contact_info: ContactInfo
     mailing_address: MailingAddress
@@ -33,6 +34,7 @@ type UserDetails {
 }
 
 input UserInput {
+    username: String!
     firstName: String!
     lastName: String
     mobile: String!
@@ -49,6 +51,7 @@ input UserInput {
 }
 type RootQuery {
     allUsers: [UserDetails!]!
+    specificUser(username: String!): UserDetails
 }
 type RootMutation {
     createUser(userInput: UserInput): UserDetails

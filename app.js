@@ -12,7 +12,7 @@ const { createJwtToken } = require('./api/utils/authentication');
 /** MongoDb Connection Establishment */
 mongoose.connect(
   "mongodb+srv://shraddha:shraddha@cluster0.svyi6.mongodb.net/octopus?retryWrites=true&w=majority",
-  { useMongoClient: true }
+  {useNewUrlParser: true, useUnifiedTopology: true}
 );
 /** For logging the requests using morgan */
 app.use(morgan("dev"));
