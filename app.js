@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const { graphqlHTTP } = require('express-graphql');
+const expressPlayground = require('graphql-playground-middleware-express')
 
 const { authentication } = require('./api/middleware/authmiddleware');
 const { createJwtToken } = require('./api/utils/authentication');
@@ -26,20 +27,23 @@ app.use(bodyParser.json());
 const graphQlSchema = require('./api/graphql/Schemas/schema');
 const graphQlResolvers = require('./api/graphql/Resolvers/userResolvers');
 
-/** Defining the graphql endpoint */
-app.use('/userManagement/v1/graphql', graphqlHTTP({
-  schema: graphQlSchema,
-  rootValue: graphQlResolvers,
-  graphiql: true
-}));
-
-/*** This Get Route is still under Test for JWT Verification Enhancement */
 app.get('/authProvider', (req, res) => {
   res.json(createJwtToken({
     username: "shraps999",
     email: "shraps123@gmail.com"
   }));
 })
+
+app.use(authentication);
+
+/** Defining the graphql endpoint */
+app.use('/userManagement/v1/graphql', graphqlHTTP({
+  schema: graphQlSchema,
+  rootValue: graphQlResolvers,
+  graphiql:true
+}));
+
+/*** This Get Route is still under Test for JWT Verification Enhancement */
 
 /** Exporting App configuration for Server Creation */
 module.exports = app;
